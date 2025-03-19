@@ -98,3 +98,9 @@
     display: none;
    }
   }
+  @media (max-width:500px){
+   .logo-img{
+      width: 90px;
+      height: 30px;
+   }
+  }
