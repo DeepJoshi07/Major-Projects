@@ -15,7 +15,9 @@ export const signup = async(req,res)=>{
         if(exists){
             return res.status(400).json({message:"user already exists!"})
         }
-
+        if(password.length < 8){
+            return res.status(401).json({message:"password is short"})
+        }
         let newPass = await bcrypt.hash(password,10);
 
         const user = await new User({
