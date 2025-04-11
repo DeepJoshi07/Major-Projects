@@ -6,13 +6,34 @@ import { FaUserGroup } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
 import dp from "../assets/dp.png";
 import { userDataContext } from "../Context/UserContext";
+import axios from "axios";
+import { authDataContext } from "../Context/AuthContext";
+
 
 function Navbar() {
+  const {setUserData} = useContext(userDataContext)
+  const {serverUrl} = useContext(authDataContext)
+
   const { userData } = useContext(userDataContext);
   const [activeSearch, setActiveSearch] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+
+  const handlelogout = async () =>{
+      try {
+        const result = await axios.post(serverUrl + "/logout",{
+          withCredentials:true
+        })
+        console.log(result);
+        setUserData(null);
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+  }
+
   return (
-    <div className="h-[80px] w-full flex justify-around items-center bg-white fixed top-0 shadow-lg">
+    <div className="h-[80px] w-full flex justify-around items-center mb-[10px] bg-white z-10 fixed top-0 shadow-lg">
       <div className="flex justify-center items-center gap-[10px]">
         <div>
           <img
@@ -50,11 +71,11 @@ function Navbar() {
 
       <div className="flex gap-[15px] relative justify-center items-center">
         <div
-          className={`absolute w-[300px] min-h-[300px] top-[80px] rounded-lg bg-white ${
+          className={`absolute w-[300px] min-h-[300px] shadow-xl top-[80px] rounded-lg bg-white ${
             showProfile ? "block" : "hidden"
           } flex flex-col justify-center gap-[10px] items-center`}
         >
-          <div className="h-[70px] rounded-full overflow-hidden flex flex-col justify-center items-center">
+          <div className="h-[70px] rounded-full overflow-hidden  flex flex-col justify-center items-center">
             <img src={dp} alt="" className="h-[70px] rounded-full " />
           </div>
           <div className="font-semibold">
@@ -70,7 +91,7 @@ function Navbar() {
             <FaUserGroup className="text-[25px]" />
             <div>My Network</div>
           </div>
-          <button className="w-[80%] py-[5px] border-1 border-[#ec3211df] rounded-full text-[#ec3211df] font-semibold">
+          <button onClick={handlelogout} className="w-[80%] py-[5px] border-1 border-[#ec3211df] rounded-full text-[#ec3211df] font-semibold">
                 Sign Out
           </button>
         </div>

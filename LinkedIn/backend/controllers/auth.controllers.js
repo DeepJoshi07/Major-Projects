@@ -64,7 +64,7 @@ export const login = async(req,res)=>{
             maxAge:7*24*60*60*1000,
             secure:process.env.NODE_ENVIROMENT === "production"
         })
-        return res.status(201).json({message:"user has logged in"})
+        return res.status(200).json({message:"user has logged in"})
     } catch (error) {
         return res.status(401).json({message:"login error"})
     }
@@ -73,7 +73,7 @@ export const login = async(req,res)=>{
 export const logout = async(req,res)=>{
     try {
         res.clearCookie("accessLinkedIn");
-        return res.status(201).json({message:"user has logout"})
+        return res.status(200).json({message:"user has logout"})
     } catch (error) {
         return res.status(401).json({message:"logout error"})
 

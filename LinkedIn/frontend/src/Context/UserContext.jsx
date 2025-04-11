@@ -8,7 +8,7 @@ export const userDataContext = createContext()
 
 function UserContext({children}) {
     const {serverUrl} = useContext(authDataContext);
-
+    const [editProfile,setEditProfile] = useState(false) 
 
     const [userData,setUserData] = useState(null)
 
@@ -33,7 +33,9 @@ function UserContext({children}) {
         serverUrl,
         userData,
         setUserData,
-        getUserData
+        getUserData,
+        editProfile,
+        setEditProfile
     }
 
   return (
