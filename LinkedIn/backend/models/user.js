@@ -47,6 +47,9 @@ const userSchema = new Schema({
         type:String,
         enum:["male",'female','other']
     },
+    headline:{
+        type:String,
+    },
     experience:[
         {
             title:String,

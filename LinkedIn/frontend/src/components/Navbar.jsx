@@ -34,6 +34,7 @@ function Navbar() {
 
   return (
     <div className="h-[80px] w-full flex justify-around items-center mb-[10px] bg-white z-10 fixed top-0 shadow-lg">
+      {/* navbar-left */}
       <div className="flex justify-center items-center gap-[10px]">
         <div>
           <img
@@ -70,13 +71,14 @@ function Navbar() {
       </div>
 
       <div className="flex gap-[15px] relative justify-center items-center">
+        {/* mini-profile */}
         <div
           className={`absolute w-[300px] min-h-[300px] shadow-xl top-[80px] rounded-lg bg-white ${
             showProfile ? "block" : "hidden"
           } flex flex-col justify-center gap-[10px] items-center`}
         >
-          <div className="h-[70px] rounded-full overflow-hidden  flex flex-col justify-center items-center">
-            <img src={dp} alt="" className="h-[70px] rounded-full " />
+          <div className="h-[70px] w-[70px] rounded-full overflow-hidden  flex flex-col justify-center items-center">
+            <img src={userData.profileImage?userData.profileImage:dp} alt="" className="h-full w-full rounded-full " />
           </div>
           <div className="font-semibold">
             {userData.firstName + " "}
@@ -95,6 +97,7 @@ function Navbar() {
                 Sign Out
           </button>
         </div>
+        {/* navbar-rightt */}
         <div className="lg:flex flex-col justify-center items-center text-gray-600 hidden">
           <IoMdHome className="text-[25px]" />
           <div>Home</div>
@@ -108,12 +111,12 @@ function Navbar() {
           <div className="hidden md:block">Notification</div>
         </div>
         <div
-          className="h-[50px] rounded-full overflow-hidden flex flex-col justify-center items-center"
+          className="h-[50px] w-[50px] rounded-full overflow-hidden flex flex-col justify-center items-center"
           onClick={() => {
             setShowProfile((prev) => !prev);
           }}
         >
-          <img src={dp} alt="" className="h-[60px] rounded-full " />
+          <img src={userData.profileImage?userData.profileImage:dp} alt="" className="h-[60px] rounded-full " />
         </div>
       </div>
     </div>
