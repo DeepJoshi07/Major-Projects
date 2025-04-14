@@ -9,7 +9,7 @@ export const userDataContext = createContext()
 function UserContext({children}) {
     const {serverUrl} = useContext(authDataContext);
     const [editProfile,setEditProfile] = useState(false) 
-
+    const [newPost,setNewPost] = useState(false)
     const [userData,setUserData] = useState(null)
 
     const getUserData = async()=>{
@@ -35,7 +35,8 @@ function UserContext({children}) {
         setUserData,
         getUserData,
         editProfile,
-        setEditProfile
+        setEditProfile,
+        newPost,setNewPost
     }
 
   return (

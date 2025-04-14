@@ -101,7 +101,9 @@ function EditProfile() {
     setFrontendCoverImage(URL.createObjectURL(file))
   };
 
+  const [saving,setSaving] = useState(false)
   const addAllDetails = async () => {
+    setSaving(true)
     try {
       let formData = new FormData();
       formData.append("firstName",firstName)
@@ -120,13 +122,14 @@ function EditProfile() {
       if(backendCoverImage){
         formData.append("coverImage",backendCoverImage)
       }
-      const result = await axios.put(serverUrl + "/user/updateuserdata",
+      await axios.put(serverUrl + "/user/updateuserdata",
         formData,{ withCredentials:true}
       )
-      console.log(result);
-
+      setSaving(false)
+      setEditProfile(false)
       
     } catch (error) {
+      setSaving(false)
       console.log(error);
       
     }
@@ -404,7 +407,7 @@ function EditProfile() {
           onClick={addAllDetails}
           className="w-[100%] my-4 py-[8px] bg-[#0a66c2] rounded-full text-white font-semibold"
         >
-          Add All Details
+          {saving?"saving...":"Add All deatails"}
         </button>
       </div>
     </div>

@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { userDataContext } from "../Context/UserContext";
+import dp from "../assets/dp.png"
 
 function Posts() {
+  const {userData,setNewPost} = useContext(userDataContext)
+  
   return (
-    <div className='w-full lg:w-[50%]  lg:mt-[100px] mt-[20px] lg:mx-[20px] shadow-lg rounded-lg bg-white '>
-      
+    <div className="w-full lg:w-[50%]  lg:mt-[100px] mt-[20px] lg:mx-[20px]  rounded-lg bg-[#f0efe7] ">
+      <div className="w-full flex justify-center items-center gap-[10px] bg-white min-h-[110px] rounded-lg">
+        <div className="cursor-pointer  h-[70px] w-[70px] overflow-hidden bg-black rounded-full">
+          <img
+            src={userData.profileImage ? userData.profileImage : dp}
+            alt=""
+            className="w-full h-full"
+          />
+        </div>
+        <div 
+        onClick={()=>setNewPost(true)}
+        className="w-[75%] h-[60px] flex items-center px-[20px] border-2 border-gray-600 rounded-full">
+          Start a new post...
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Posts
+export default Posts;
