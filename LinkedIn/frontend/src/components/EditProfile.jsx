@@ -7,7 +7,7 @@ import { FaPlus } from "react-icons/fa6";
 import axios from "axios";
 
 function EditProfile() {
-  const { setEditProfile, userData, serverUrl } = useContext(userDataContext);
+  const { setEditProfile, userData, getUserData, serverUrl } = useContext(userDataContext);
 
   const [firstName, setFirstName] = useState(userData.firstName || null);
   const [lastName, setLastName] = useState(userData.lastName || null);
@@ -127,9 +127,10 @@ function EditProfile() {
       )
       setSaving(false)
       setEditProfile(false)
-      
+      getUserData()
     } catch (error) {
       setSaving(false)
+      getUserData()
       console.log(error);
       
     }

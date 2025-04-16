@@ -9,7 +9,7 @@ function Profile() {
     
 
   return (
-    <div className='w-full  lg:w-[25%]  mt-[100px] relative shadow-lg p-[10px] rounded-lg  bg-white '>
+    <div className='w-full max-h-[330px] lg:w-[25%]  mt-[100px] relative shadow-lg p-[10px] rounded-lg  bg-white '>
       
       <div onClick={()=>setEditProfile(true)} className='w-full h-[120px] relative bg-gray-400 rounded-lg'>
         <img src={userData.coverImage?userData.coverImage:null} className="w-full h-full rounded-lg" alt="" />

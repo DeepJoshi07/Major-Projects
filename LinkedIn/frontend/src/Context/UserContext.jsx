@@ -11,6 +11,8 @@ function UserContext({children}) {
     const [editProfile,setEditProfile] = useState(false) 
     const [newPost,setNewPost] = useState(false)
     const [userData,setUserData] = useState(null)
+    const [postData,setPostData] = useState(null)
+    const [posting,setPosting] = useState(false)
 
     const getUserData = async()=>{
         try {
@@ -24,9 +26,23 @@ function UserContext({children}) {
             
         }
     }
+    const getPost = async()=>{
+        try {
+            const result = await axios.get(serverUrl + "/data/getpost",{
+                withCredentials:true
+            })
+            
+            setPostData(result.data)
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
     useEffect(()=>{
         getUserData()
+        getPost()
     },[])
 
     const value ={
@@ -36,7 +52,9 @@ function UserContext({children}) {
         getUserData,
         editProfile,
         setEditProfile,
-        newPost,setNewPost
+        newPost,setNewPost,
+        posting,setPosting,postData,
+        getPost
     }
 
   return (

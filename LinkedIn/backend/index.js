@@ -4,6 +4,7 @@ import cors from "cors"
 import connectDb from './config/connectDb.js'
 import authRouter from "./routes/authRoutes.js"
 import userRouter from './routes/userRoutes.js'
+import postRouter from './routes/postRoutes.js'
 import cookieParser from "cookie-parser"
 const app = express()
 const port = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.use(cookieParser())
 
 app.use("/",authRouter)
 app.use("/user",userRouter)
+app.use("/data",postRouter)
 
 
 app.listen(port,()=>{

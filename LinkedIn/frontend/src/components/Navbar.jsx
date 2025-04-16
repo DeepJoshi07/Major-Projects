@@ -73,7 +73,7 @@ function Navbar() {
       <div className="flex gap-[15px] relative justify-center items-center">
         {/* mini-profile */}
         <div
-          className={`absolute w-[300px] min-h-[300px] shadow-xl top-[80px] rounded-lg bg-white ${
+          className={`absolute w-[300px] min-h-[300px] shadow-xl right-[50px] md:right-0 lg:right-0 top-[80px] rounded-lg bg-white ${
             showProfile ? "block" : "hidden"
           } flex flex-col justify-center gap-[10px] items-center`}
         >
