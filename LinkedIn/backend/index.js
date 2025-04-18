@@ -6,6 +6,8 @@ import authRouter from "./routes/authRoutes.js"
 import userRouter from './routes/userRoutes.js'
 import postRouter from './routes/postRoutes.js'
 import cookieParser from "cookie-parser"
+import connectionRouter from "./routes/connectionRoutes.js"
+
 const app = express()
 const port = process.env.PORT || 5000;
 
@@ -24,6 +26,7 @@ app.use(cookieParser())
 app.use("/",authRouter)
 app.use("/user",userRouter)
 app.use("/data",postRouter)
+app.use('/connection',connectionRouter)
 
 
 app.listen(port,()=>{
