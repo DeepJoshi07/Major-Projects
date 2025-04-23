@@ -9,19 +9,26 @@ import { acceptConnection,
 import {checkAuth} from '../middleware/checkAuth.js'
 const connectionRouter = express.Router()
 
-connectionRouter.post('/send/:id',checkAuth,sendConnection)//id of the post owner
+connectionRouter
+.post('/send/:id',checkAuth,sendConnection)//id of the post owner
 
-connectionRouter.put('/accept/:id',checkAuth,acceptConnection)//connection id(model)
+connectionRouter
+.put('/accept/:id',checkAuth,acceptConnection)//connection id(model)
 
-connectionRouter.put('/rejected/:id',checkAuth,rejectConnection)//connection id(model)
+connectionRouter
+.put('/rejected/:id',checkAuth,rejectConnection)//connection id(model)
 
-connectionRouter.get('/getstatus/:id',checkAuth,getConnectionStatus)//id of the user we sent request to
+connectionRouter
+.get('/getstatus/:id',checkAuth,getConnectionStatus)//id of the user we sent request to
 
-connectionRouter.post('/remove/:id',checkAuth,removeConnection)//id of the user we want to disconnect
+connectionRouter
+.delete('/remove/:id',checkAuth,removeConnection)//id of the user we want to disconnect
 
-connectionRouter.get('/requests/',checkAuth,getConnectionRequests)
+connectionRouter
+.get('/requests/',checkAuth,getConnectionRequests)
 
-connectionRouter.get('/',checkAuth,getUserConnections)
+connectionRouter
+.get('/',checkAuth,getUserConnections)
 
 
 export default connectionRouter;

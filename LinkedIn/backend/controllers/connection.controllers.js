@@ -1,3 +1,4 @@
+import { io, userSocketMap } from '../index.js'
 import Connection from '../models/connection.js'
 import User from '../models/user.js'
 
@@ -28,6 +29,24 @@ export const sendConnection = async(req,res)=>{
             receiver:id,
         })
         newConnection.save();
+        
+        // const receiver = await User.findById(id)
+        // .populate("connection","firstName lastName userName profileImage headline connections")
+
+        let receiverSocketId = userSocketMap.get(id);
+        let senderSocketId = userSocketMap.get(sender);
+
+        if(receiverSocketId){
+            io.to(receiverSocketId)
+            .emit("statusUpdated",{updatedUserId:sender,newStatus:'received'})
+            // io.to(receiverSocketId)
+            // .emit("invite",{receiver})
+        }
+        if(senderSocketId){
+            io.to(senderSocketId)
+            .emit("statusUpdated",{updatedUserId:id,newStatus:'pending'})
+        }
+
         return res.status(200).json(newConnection)
     } catch (error) {
         console.log(error);
@@ -59,6 +78,19 @@ export const acceptConnection = async(req,res)=>{
         await User.findByIdAndUpdate(connection.sender._id,{
             $addToSet:{connection:userId}
         })
+
+        let receiverSocketId = userSocketMap.get(connection.receiver._id.toString());
+        let senderSocketId = userSocketMap.get(connection.sender._id.toString());
+
+        if(receiverSocketId){
+            io.to(receiverSocketId)
+            .emit("statusUpdated",{updatedUserId:connection.sender._id,newStatus:'disconnect'})
+        }
+        if(senderSocketId){
+            io.to(senderSocketId)
+            .emit("statusUpdated",{updatedUserId:userId,newStatus:'disconnect'})
+        }
+
         return res.status(200).json({message:"connection accepted"})
     } catch (error) {
         console.log(error);
@@ -81,6 +113,8 @@ export const rejectConnection = async(req,res)=>{
             return res.status(400).json({message:`connection already under proccess`})
         }
         connection.status = 'rejected'
+        const senderId = userSocketMap.get(connection.sender._id.toString())
+        io.to(senderId).emit("rejectedStatus",{status:"connect"})
         connection.save()
 
         return res.status(200).json({message:"connection rejected by user"})
@@ -102,7 +136,7 @@ export const getConnectionStatus = async(req,res)=>{
             return res.json({status:'disconnect'})
         }
         const pendingRequest = await Connection.findOne({
-            $of:[
+            $or:[
                 {sender:currentUserId,receiver:targetUserId},
                 {sender:targetUserId,receiver:currentUserId}
             ],
@@ -110,7 +144,7 @@ export const getConnectionStatus = async(req,res)=>{
         });
 
         if(pendingRequest){
-            if(pendingRequest.sender.toString() === currentUserId.toString()){
+            if(pendingRequest.sender.toString() == currentUserId.toString()){
                 return res.json({status:'pending'})
             }else{
                 return res.json({status:'received',requestId:pendingRequest._id})
@@ -138,6 +172,18 @@ export const removeConnection = async(req,res)=>{
         await User.findByIdAndUpdate(otherUserId,
             { $pull: {connection:id}});
         
+            let receiverSocketId = userSocketMap.get(otherUserId);
+            let senderSocketId = userSocketMap.get(id);
+    
+            if(receiverSocketId){
+                io.to(receiverSocketId)
+                .emit("statusUpdated",{updatedUserId:id,newStatus:'connect'})
+            }
+            if(senderSocketId){
+                io.to(senderSocketId)
+                .emit("statusUpdated",{updatedUserId:otherUserId,newStatus:'connect'})
+            }
+
         return res.json({message:'connection removed successfully'})
     } catch (error) {
         console.log(error);

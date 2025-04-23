@@ -1,5 +1,6 @@
 import Post from '../models/post.js'
 import uploadOnCloudinary from '../config/cloudinary.js';
+import { io } from '../index.js';
 
 export const createPost = async(req,res) =>{
     try {
@@ -32,6 +33,7 @@ export const getPost = async(req,res)=>{
         .populate("author","firstName lastName profileImage headline")
         .populate("comment.user","firstName lastName profileImage ")
         .sort({createdAt:-1})
+        io.emit("posts",{post})
         return res.status(200).json(post)
     } catch (error) {
 
@@ -56,6 +58,7 @@ export const like = async(req,res)=>{
             post.like.push(userId)
         }
         post.save()
+        io.emit("likeUpdated",{postId,likes:post.like})
         return res.status(200).json(post)
     } catch (error) {
         return res.status(500).json({message:`like error ${error}`})
@@ -74,6 +77,7 @@ export const comment = async(req,res)=>{
         if(!post){
             return res.status(400).json({message:'post does not exists'})
         }
+        io.emit("commentUpdated",{postId,comment:post.comment})
         return res.status(200).json(post)
     } catch (error) {
         return res.status(500).json({message:`comment error ${error}`})

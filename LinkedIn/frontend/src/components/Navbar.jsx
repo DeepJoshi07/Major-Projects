@@ -8,11 +8,13 @@ import dp from "../assets/dp.png";
 import { userDataContext } from "../Context/UserContext";
 import axios from "axios";
 import { authDataContext } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 function Navbar() {
   const {setUserData} = useContext(userDataContext)
   const {serverUrl} = useContext(authDataContext)
+  const navigate = useNavigate()
 
   const { userData } = useContext(userDataContext);
   const [activeSearch, setActiveSearch] = useState(false);
@@ -20,10 +22,10 @@ function Navbar() {
 
   const handlelogout = async () =>{
       try {
-        const result = await axios.post(serverUrl + "/logout",{
+         await axios.post(serverUrl + "/logout",{
           withCredentials:true
         })
-        console.log(result);
+        
         setUserData(null);
         
       } catch (error) {
@@ -89,7 +91,9 @@ function Navbar() {
             View Profile
           </button>
           <div className=" m-[10px] border-[1px] border-gray-400 w-[80%]"></div>
-          <div className="flex gap-[10px] my-[5px] py-10px justify-center items-center text-gray-600">
+          <div 
+          onClick={()=>navigate('/network')}
+          className="flex gap-[10px] my-[5px] py-10px justify-center items-center text-gray-600">
             <FaUserGroup className="text-[25px]" />
             <div>My Network</div>
           </div>
@@ -98,11 +102,15 @@ function Navbar() {
           </button>
         </div>
         {/* navbar-rightt */}
-        <div className="lg:flex flex-col justify-center items-center text-gray-600 hidden">
+        <div 
+        onClick={()=>navigate('/')}
+        className="lg:flex flex-col justify-center items-center text-gray-600 hidden">
           <IoMdHome className="text-[25px]" />
           <div>Home</div>
         </div>
-        <div className="md:flex flex-col justify-center items-center text-gray-600 hidden">
+        <div 
+        onClick={()=>navigate('/network')}
+        className="md:flex flex-col justify-center items-center text-gray-600 hidden">
           <FaUserGroup className="text-[25px]" />
           <div>My network</div>
         </div>

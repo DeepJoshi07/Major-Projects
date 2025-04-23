@@ -5,9 +5,8 @@ import dp from "../assets/dp.png";
 import { FaImage } from "react-icons/fa6";
 import axios from "axios";
 
-
 function AddPost() {
-  const { setNewPost, userData, serverUrl, setPosting, posting } =
+  const { setNewPost, userData, serverUrl, getPost, setPosting, posting } =
     useContext(userDataContext);
   const [description, setDescription] = useState(null);
   const [postingImage, setPostingImage] = useState(null);
@@ -26,6 +25,7 @@ function AddPost() {
     formData.append("image", postingImage);
   }
 
+  
   const handlePost = async () => {
     setPosting(true);
     try {
@@ -35,11 +35,13 @@ function AddPost() {
 
       setNewPost(false);
       setPosting(false);
+      getPost();
     } catch (error) {
       setPosting(false);
       console.log(error);
     }
   };
+
   return (
     <div className="w-full h-[100vh] fixed top-0 flex flex-col justify-center items-center z-100">
       <div className="w-full h-[100vh] bg-black opacity-60"></div>
@@ -106,7 +108,7 @@ function AddPost() {
             onClick={handlePost}
             className="my-[20px]  right-0 bg-[#0a66c2] font-semibold w-[80px] rounded-lg text-white py-[8px]"
           >
-            {posting ? "posting..." : "post"}
+            {posting ? "Posting..." : "Post"}
           </button>
         </div>
         

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import AddPost from "../components/AddPost.jsx"
+import AddPost from "../Posts/AddPost.jsx"
 import Navbar from "../components/Navbar.jsx";
-import Profile from "../components/Profile.jsx";
-import Posts from "../components/Posts.jsx";
+import Profile from "../Profile/Profile.jsx";
+import Posts from "../Posts/Posts.jsx";
 import Others from "../components/Others.jsx";
-import EditProfile from "../components/EditProfile.jsx";
+import EditProfile from "../Profile/EditProfile.jsx";
 import { userDataContext } from "../Context/UserContext.jsx";
 
 function Home() {

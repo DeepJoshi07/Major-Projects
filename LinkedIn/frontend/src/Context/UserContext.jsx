@@ -53,7 +53,8 @@ function UserContext({children}) {
         editProfile,
         setEditProfile,
         newPost,setNewPost,
-        posting,setPosting,postData,
+        posting,setPosting,
+        postData,setPostData,
         getPost
     }
 

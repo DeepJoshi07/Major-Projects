@@ -7,17 +7,38 @@ import userRouter from './routes/userRoutes.js'
 import postRouter from './routes/postRoutes.js'
 import cookieParser from "cookie-parser"
 import connectionRouter from "./routes/connectionRoutes.js"
-
-const app = express()
-const port = process.env.PORT || 5000;
-
-
+import http from 'http'
+import { Server } from "socket.io"
 env.config()
 
+const app = express()
 app.use(cors({
     origin:"http://localhost:5173",
     credentials:true
 }))
+
+
+const server = http.createServer(app);
+export const io = new Server(server,{
+    cors:{
+        origin:"http://localhost:5173",
+        credentials:true
+    }
+})
+export const userSocketMap = new Map();
+io.on('connection',(socket)=>{
+    socket.on("register",(userId)=>{
+        userSocketMap.set(userId,socket.id)
+    })
+    socket.on('disconnect',(socket)=>{
+
+    })
+})
+
+const port = process.env.PORT || 5000;
+
+
+
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser())
@@ -29,7 +50,7 @@ app.use("/data",postRouter)
 app.use('/connection',connectionRouter)
 
 
-app.listen(port,()=>{
+server.listen(port,()=>{
     connectDb()
     console.log("app is listening");
     

@@ -1,10 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { userDataContext } from "../Context/UserContext";
 import dp from "../assets/dp.png";
 import AllPost from "./AllPost";
+import {io} from 'socket.io-client'
 
+let socket = io("http://localhost:4000");
 function Posts() {
-  const { userData, setNewPost, postData } = useContext(userDataContext);
+  const { userData, setNewPost, postData, setPostData } = useContext(userDataContext);
+  useEffect(()=>{
+    socket.on('posts',({post})=>{
+        setPostData(post)
+    })
+    return () =>{
+      socket.off('posts')
+    }
+  },[postData])
 
   return (
     <div className="w-full lg:w-[50%]  lg:mt-[100px] mt-[20px] lg:mx-[20px] gap-[20px]  rounded-lg bg-[#f0efe7] ">
