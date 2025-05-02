@@ -5,19 +5,19 @@ import { MdOutlineCameraAlt } from "react-icons/md";
 import { userDataContext } from '../Context/UserContext';
 
 function Profile() {
-    const {userData,setEditProfile} = useContext(userDataContext)
+    const {userData,setEdit} = useContext(userDataContext)
     
 
   return (
     <div className='w-full max-h-[330px] lg:w-[25%]  mt-[100px] relative shadow-lg p-[10px] rounded-lg  bg-white '>
       
-      <div onClick={()=>setEditProfile(true)} className='w-full h-[120px] relative bg-gray-400 rounded-lg'>
+      <div onClick={()=>setEdit(true)} className='w-full h-[120px] relative bg-gray-400 rounded-lg'>
         <img src={userData.coverImage?userData.coverImage:null} className="w-full h-full rounded-lg" alt="" />
         <div className=' absolute text-white top-[20px] right-[20px]'>
         <MdOutlineCameraAlt className='cursor-pointer text-3xl'/>
         </div>
       </div>
-      <div onClick={()=>setEditProfile(true)} className='cursor-pointer absolute top-[80px] left-[40px] h-[70px] w-[70px] overflow-hidden bg-black rounded-full'>
+      <div onClick={()=>setEdit(true)} className='cursor-pointer absolute top-[80px] left-[40px] h-[70px] w-[70px] overflow-hidden bg-black rounded-full'>
         <img src={userData.profileImage?userData.profileImage:dp} alt="" className='w-full h-full' />
         
       </div>
@@ -27,7 +27,7 @@ function Profile() {
             <div>{userData.headline?userData.headline:""}</div>
             <div className='text-[14px]'>{userData.location?userData.location:""}</div>
         </div>
-        <button onClick={()=>setEditProfile(true)} className="w-[100%] h-[50px] rounded-full text-[#0a66c2] font-semibold my-[20px] border-2 border-[#0a66c2] cursor-pointer">Edit Profile</button>
+        <button onClick={()=>setEdit(true)} className="w-[100%] h-[50px] rounded-full text-[#0a66c2] font-semibold my-[20px] border-2 border-[#0a66c2] cursor-pointer">Edit Profile</button>
     </div>
   )
 }

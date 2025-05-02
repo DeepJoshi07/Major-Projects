@@ -58,3 +58,53 @@ export const updateUserData = async(req,res)=>{
         return res.status(500).json({message:"update profile error"})
     }
 }
+
+export const getProfile = async(req,res)=>{
+    try {
+        let {username} = req.params;
+        const user = await User.findOne({userName:username}).select("-password")
+        if(!user){
+            return res.status(500).json({message:"user doesn't exists"})
+        }
+        return res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:`GetProfile Erorr ${error}`})
+    }
+}
+
+export const search = async(req,res) => {
+    try {
+        let {query} = req.query
+        if(!query) {
+            return res.status(400).json({message:'query is must to find users'})
+        }
+        const users = await User.find({
+            $or:[
+                {firstName:{$regex:query,$options:"i"}},
+                {lastName:{$regex:query,$options:"i"}},
+                {userName:{$regex:query,$options:"i"}},
+                {skills:{$in:query}},
+                
+            ]
+        })
+        return res.status(200).json(users)
+    } catch (error) {
+        
+    }
+}
+
+export const getSuggestedUser = async(req,res) => {
+    try {
+        const currUser = await User.findById(req.userId).select('connection')
+        const users = await User.find({
+            _id:{
+                $ne:currUser,$nin:currUser.connection
+            }
+        }).select('-password')
+        
+        return res.status(200).json(users)
+    } catch (error) {
+        return res.status(500).json({message:`getSuggestedUser error ${error}`})
+    }
+}

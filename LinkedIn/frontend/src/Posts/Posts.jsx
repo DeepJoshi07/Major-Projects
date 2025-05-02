@@ -2,16 +2,18 @@ import React, { useContext, useEffect } from "react";
 import { userDataContext } from "../Context/UserContext";
 import dp from "../assets/dp.png";
 import AllPost from "./AllPost";
+import {v4 as uuidv4} from 'uuid'
 import {io} from 'socket.io-client'
 
-let socket = io("http://localhost:4000");
+
+let socket = io('http://localhost:4000')
 function Posts() {
   const { userData, setNewPost, postData, setPostData } = useContext(userDataContext);
   useEffect(()=>{
     socket.on('posts',({post})=>{
-        setPostData(post)
+      setPostData(post)
     })
-    return () =>{
+    return () => {
       socket.off('posts')
     }
   },[postData])
@@ -33,9 +35,9 @@ function Posts() {
           Start a new post...
         </div>
       </div>
-      {postData.map((post, index) => (
+      {postData.map((post) => (
         <AllPost
-          key={index}
+          key={uuidv4()}
           id={post._id}
           description={post.description}
           image={post.image}

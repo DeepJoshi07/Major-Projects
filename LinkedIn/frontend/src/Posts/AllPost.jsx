@@ -13,11 +13,13 @@ import ConnectionBtn from "../components/ConnectionBtn";
 let socket = io("http://localhost:4000");
 function AllPost({ id, author, like, comment, description, createdAt, image }) {
   const [readless, setRead] = useState(true);
-  const { serverUrl, getPost, userData } = useContext(userDataContext);
+  const { serverUrl, getPost, userData, handleGetProfile } = useContext(userDataContext);
   const [content, setContent] = useState(null);
   const [showComments, setShowComments] = useState(false);
   const [likes, setLikes] = useState(like || []);
   const [comments, setComments] = useState(comment || []);
+ 
+
 
   const handleLike = async () => {
     try {
@@ -69,9 +71,11 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
     };
   }, [id]);
   return (
-    <div className="w-full bg-white flex flex-col  my-[20px] p-[20px] shadow-xl rounded-lg">
+    <div className="w-full bg-white flex flex-col  mt-[20px] p-[20px] shadow-xl rounded-lg">
       <div className="flex justify-between items-center gap-[10px] ">
-        <div className="flex items-center gap-[10px] ">
+        <div className="flex items-center gap-[10px] "
+          onClick={()=>handleGetProfile(author.userName)}
+        >
           {/* profile and button */}
           <div className="cursor-pointer  h-[70px] w-[70px] overflow-hidden bg-black rounded-full">
             <img
@@ -130,7 +134,7 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
         {/* like */}
         <div
           onClick={handleLike}
-          className="flex items-center gap-[10px] text-[#0a66c2]"
+          className="flex items-center gap-[10px]"
         >
           {likes.includes(userData._id) ? (
             <BiSolidLike className="text-[#0a66c2] text-2xl" />
@@ -173,7 +177,7 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
                   />
                 </div>
                 <span className="font-semibold">
-                  {c.user.firstName}
+                  {c.user.firstName+" "}
                   {c.user.lastName}
                 </span>
               </div>

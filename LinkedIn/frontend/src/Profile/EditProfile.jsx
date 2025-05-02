@@ -7,7 +7,7 @@ import { FaPlus } from "react-icons/fa6";
 import axios from "axios";
 
 function EditProfile() {
-  const { setEditProfile, userData, getUserData, serverUrl } = useContext(userDataContext);
+  const { setEdit, userData, getUserData, serverUrl } = useContext(userDataContext);
 
   const [firstName, setFirstName] = useState(userData.firstName || null);
   const [lastName, setLastName] = useState(userData.lastName || null);
@@ -112,6 +112,8 @@ function EditProfile() {
       formData.append("email",email)
       formData.append("headline",headline)
       formData.append("location",location)
+      formData.append("gender",gender)
+
       formData.append("skills",JSON.stringify(skills))
       formData.append("education",JSON.stringify(education))
       formData.append("experience",JSON.stringify(experience))
@@ -126,7 +128,7 @@ function EditProfile() {
         formData,{ withCredentials:true}
       )
       setSaving(false)
-      setEditProfile(false)
+      setEdit(false)
       getUserData()
     } catch (error) {
       setSaving(false)
@@ -141,7 +143,7 @@ function EditProfile() {
       <div className="w-full h-[100vh] flex flex-col justify-center items-center bg-black opacity-60   "></div>
       <div className="w-[90%] max-w-[500px] h-[600px] p-[10px] bg-white rounded-lg absolute overflow-y-scroll z-200">
         <div className="text-gray-600 text-3xl absolute right-[20px] top-[17px] cursor-pointer">
-          <MdOutlineClose onClick={() => setEditProfile(false)} />
+          <MdOutlineClose onClick={() => setEdit(false)} />
         </div>
         {/* cover-image */}
         <div
@@ -241,7 +243,7 @@ function EditProfile() {
                 type="radio"
                 name="color"
                 value="male"
-                checked={gender === "male"?true:false}
+                checked={gender == "male"?true:false}
                 onClick={() => setGender("male")}
               />{" "}
               male
@@ -251,7 +253,7 @@ function EditProfile() {
                 type="radio"
                 name="color"
                 value="female"
-                checked={gender === "female"?true:false}
+                checked={gender == "female"?true:false}
                 onClick={() => setGender("female")}
               />{" "}
               female
@@ -261,7 +263,7 @@ function EditProfile() {
                 type="radio"
                 name="color"
                 value="other"
-                checked={gender === "other"?true:false}
+                checked={gender == "other"?true:false}
                 onClick={() => setGender("other")}
               />{" "}
               other

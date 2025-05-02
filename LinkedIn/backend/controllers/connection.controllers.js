@@ -30,17 +30,15 @@ export const sendConnection = async(req,res)=>{
         })
         newConnection.save();
         
-        // const receiver = await User.findById(id)
-        // .populate("connection","firstName lastName userName profileImage headline connections")
-
+       
+        
         let receiverSocketId = userSocketMap.get(id);
         let senderSocketId = userSocketMap.get(sender);
 
         if(receiverSocketId){
             io.to(receiverSocketId)
             .emit("statusUpdated",{updatedUserId:sender,newStatus:'received'})
-            // io.to(receiverSocketId)
-            // .emit("invite",{receiver})
+           
         }
         if(senderSocketId){
             io.to(senderSocketId)
@@ -213,7 +211,7 @@ export const getUserConnections = async (req,res) => {
     try {
         const id = req.userId;
 
-        const user = await User.findById(userId)
+        const user = await User.findById(id)
         .populate("connection","firstName lastName userName profileImage headline connections");
 
         return res.status(200).json(user.connection)

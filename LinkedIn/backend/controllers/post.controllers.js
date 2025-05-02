@@ -4,7 +4,7 @@ import { io } from '../index.js';
 
 export const createPost = async(req,res) =>{
     try {
-        const {description,like} = req.body;
+        const {description} = req.body;
         let newPost;
         if(req.file){
             let image = await uploadOnCloudinary(req.file.path)
@@ -21,6 +21,7 @@ export const createPost = async(req,res) =>{
             })
         }
         newPost.save()
+
         return res.status(201).json(newPost)
     } catch (error) {
         console.log(error)
@@ -30,10 +31,11 @@ export const createPost = async(req,res) =>{
 export const getPost = async(req,res)=>{
     try {
         const post = await Post.find()
-        .populate("author","firstName lastName profileImage headline")
+        .populate("author","firstName lastName userName profileImage headline")
         .populate("comment.user","firstName lastName profileImage ")
         .sort({createdAt:-1})
-        io.emit("posts",{post})
+        
+        io.emit('posts',{post})
         return res.status(200).json(post)
     } catch (error) {
 

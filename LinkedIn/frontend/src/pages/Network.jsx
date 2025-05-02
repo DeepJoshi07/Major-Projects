@@ -5,11 +5,9 @@ import { RxCrossCircled } from "react-icons/rx";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { userDataContext } from "../Context/UserContext";
 import axios from "axios";
-import {io} from 'socket.io-client'
 
-let socket = io("http://localhost:4000");
 function Network() {
-  const { serverUrl,getPost } = useContext(userDataContext);
+  const { serverUrl} = useContext(userDataContext);
   const [invitations, setInvitations] = useState([]);
   const handleRequests = async () => {
     try {
@@ -35,6 +33,7 @@ function Network() {
        await axios.put(serverUrl +`/connection/rejected/${id}`,{},
         {withCredentials:true})
         setInvitations(invitations.filter((invite)=>id == invite.id))
+    
     } catch (error) {
       console.log(error)
     }
@@ -42,11 +41,7 @@ function Network() {
   useEffect(() => {
     handleRequests();
   }, []);
-  // useEffect(() => {
-  //   socket.on('invite',({receiver})=>{
-  //     setInvitations(receiver.connection)
-  //   })
-  // }, [getPost]);
+ 
   return (
     <div className="w-full h-[100vh] bg-[#f0efe7]">
       <Navbar />

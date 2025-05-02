@@ -8,11 +8,11 @@ import EditProfile from "../Profile/EditProfile.jsx";
 import { userDataContext } from "../Context/UserContext.jsx";
 
 function Home() {
-  const {editProfile,newPost} = useContext(userDataContext)
+  const {edit,newPost} = useContext(userDataContext)
   return (
     <div className="w-full h-[100vh] bg-[#f0efe7]">
       <Navbar />
-      {editProfile && <EditProfile />}
+      {edit && <EditProfile />}
       {newPost && <AddPost/>}
       <div className="bg-[#f0efe7] relative flex flex-col lg:flex lg:flex-row justify-center px-[20px]">
         <Profile />
