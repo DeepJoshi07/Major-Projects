@@ -31,7 +31,7 @@ export const signup = async(req,res)=>{
         const token = await newToken(user.id);
         res.cookie("accessLinkedIn",token,{
             httpOnly:true,
-            sameSite:"strict",
+            sameSite:"none",
             maxAge:7*24*60*60*1000,
             secure:process.env.NODE_ENVIROMENT === "production"
         })
@@ -60,7 +60,7 @@ export const login = async(req,res)=>{
         const token = await newToken(exists.id);
         res.cookie("accessLinkedIn",token,{
             httpOnly:true,
-            sameSite:"strict",
+            sameSite:"none",
             maxAge:7*24*60*60*1000,
             secure:process.env.NODE_ENVIROMENT === "production"
         })
