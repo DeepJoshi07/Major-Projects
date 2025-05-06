@@ -14,7 +14,7 @@ env.config()
 
 const app = express()
 app.use(cors({
-    origin:"https://linkedin-frontend-7u4c.onrender.com",
+    origin:"http://localhost:5173",
     credentials:true
 }))
 
@@ -22,7 +22,7 @@ app.use(cors({
 const server = http.createServer(app);
 export const io = new Server(server,{
     cors:{
-        origin:"https://linkedin-frontend-7u4c.onrender.com",
+        origin:"http://localhost:5173",
         credentials:true
     }
 })

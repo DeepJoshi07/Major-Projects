@@ -64,7 +64,7 @@ function Login() {
          />
          <div className="h-[50px] w-[100%] relative border-2 border-gray-600 text-gray-800 text-[18px] border-none rounded-md">
            <span
-             className="absolute mt-[10px] ml-[300px] text-[#0a66c2] cursor-pointer"
+             className="absolute right-[20px] top-[10px] text-[#0a66c2] cursor-pointer"
              onClick={() => setShow((prev) => !prev)}
            >
              {show ? <p className="font-semibold">hide</p> : <p className="font-semibold">show</p>}
