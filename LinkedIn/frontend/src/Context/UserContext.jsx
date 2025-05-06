@@ -2,7 +2,9 @@ import axios from 'axios'
 import React, { Children, createContext, useContext, useEffect, useState } from 'react'
 import { authDataContext } from './AuthContext'
 import { useNavigate } from 'react-router-dom';
+import { io } from "socket.io-client";
 
+let socket = io("http://localhost:4000");
 
 export const userDataContext = createContext()
 
@@ -70,7 +72,7 @@ function UserContext({children}) {
         postData,setPostData,
         getPost,
         profileData,setProfileData,
-        handleGetProfile
+        handleGetProfile,socket
     }
 
   return (

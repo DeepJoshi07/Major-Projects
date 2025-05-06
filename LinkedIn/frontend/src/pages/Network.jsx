@@ -46,7 +46,7 @@ function Network() {
     <div className="w-full h-[100vh] bg-[#f0efe7]">
       <Navbar />
       <div className="flex flex-col justify-center items-center bg-[#f0efe7]">
-        <div className="flex  items-center text-2xl h-[80px] w-[90%] rounded-lg border-none pl-[20px] mt-[90px] my-[10px] bg-white shadow-lg">
+        <div className="flex  items-center text-2xl text-gray-800 font-semibold h-[80px] w-[90%] rounded-lg border-none pl-[20px] mt-[90px] my-[10px] bg-white shadow-lg">
           Invitations: {" " + invitations.length}
         </div>
         {invitations.map((invite, index) => {

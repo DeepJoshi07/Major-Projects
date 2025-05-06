@@ -1,6 +1,7 @@
 import Post from '../models/post.js'
 import uploadOnCloudinary from '../config/cloudinary.js';
 import { io } from '../index.js';
+import Notification from '../models/notification.js';
 
 export const createPost = async(req,res) =>{
     try {
@@ -58,6 +59,16 @@ export const like = async(req,res)=>{
            post.like = post.like.filter((id)=> id != userId)
         }else{
             post.like.push(userId)
+            if(post.author != userId){
+                const notification = await new Notification({
+                    reciever:post.author,
+                    type:"like",
+                    relatedUser:userId,
+                    relatedPost:postId
+                })
+                notification.save()
+            }
+           
         }
         post.save()
         io.emit("likeUpdated",{postId,likes:post.like})
@@ -80,6 +91,15 @@ export const comment = async(req,res)=>{
             return res.status(400).json({message:'post does not exists'})
         }
         io.emit("commentUpdated",{postId,comment:post.comment})
+        if(post.author != userId){
+            const notification = await new Notification({
+                reciever:post.author,
+                type:"comment",
+                relatedUser:userId,
+                relatedPost:postId
+            })
+            notification.save()
+        }
         return res.status(200).json(post)
     } catch (error) {
         return res.status(500).json({message:`comment error ${error}`})

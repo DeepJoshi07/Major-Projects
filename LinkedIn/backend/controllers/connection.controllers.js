@@ -1,5 +1,6 @@
 import { io, userSocketMap } from '../index.js'
 import Connection from '../models/connection.js'
+import Notification from '../models/notification.js'
 import User from '../models/user.js'
 
 export const sendConnection = async(req,res)=>{
@@ -67,6 +68,12 @@ export const acceptConnection = async(req,res)=>{
             return res.status(400).json({message:`connection already under proccess`})
         }
         connection.status = 'accepted'
+          const notification = await new Notification({
+                        reciever:connection.sender,
+                        type:"connectionAccepted",
+                        relatedUser:userId,
+                    })
+                    notification.save()
         connection.save()
 
         await User.findByIdAndUpdate(userId,{

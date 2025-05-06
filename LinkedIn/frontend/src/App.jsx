@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Network from './pages/Network'
 import { userDataContext } from './Context/UserContext'
 import ProfilePage from './Profile/ProfilePage'
+import Notifications from './components/Notifications'
 
 function App() {
   const {userData} = useContext(userDataContext)
@@ -17,6 +18,7 @@ function App() {
         <Route path='/login' element={userData?<Navigate to='/'/>:<Login/>}/>
         <Route path='/network' element={userData?<Network/>:<Navigate to="/login"/>}/>
         <Route path='/profilepage' element={userData?<ProfilePage/>:<Navigate to="/login"/>}/>
+        <Route path='/notification' element={userData?<Notifications/>:<Navigate to="/login"/>}/>
 
       </Routes>
     </div>

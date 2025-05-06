@@ -7,19 +7,16 @@ import { userDataContext } from "../Context/UserContext";
 import { IoSend } from "react-icons/io5";
 import { BiSolidLike } from "react-icons/bi";
 import axios from "axios";
-import { io } from "socket.io-client";
 import ConnectionBtn from "../components/ConnectionBtn";
 
-let socket = io("http://localhost:4000");
 function AllPost({ id, author, like, comment, description, createdAt, image }) {
   const [readless, setRead] = useState(true);
-  const { serverUrl, getPost, userData, handleGetProfile } = useContext(userDataContext);
-  const [content, setContent] = useState(null);
+  const { serverUrl, getPost, userData, handleGetProfile, socket } =
+    useContext(userDataContext);
+  const [content, setContent] = useState('');
   const [showComments, setShowComments] = useState(false);
   const [likes, setLikes] = useState(like || []);
   const [comments, setComments] = useState(comment || []);
- 
-
 
   const handleLike = async () => {
     try {
@@ -50,6 +47,7 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
       setComments(result.data.comment);
       getPost();
     } catch (error) {
+      setContent("");
       console.log(error);
     }
   };
@@ -64,7 +62,7 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
         setComments(comment);
       }
     });
-   
+
     return () => {
       socket.off("likeUpdated");
       socket.off("commentUpdated");
@@ -73,11 +71,12 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
   return (
     <div className="w-full bg-white flex flex-col  mt-[20px] p-[20px] shadow-xl rounded-lg">
       <div className="flex justify-between items-center gap-[10px] ">
-        <div className="flex items-center gap-[10px] "
-          onClick={()=>handleGetProfile(author.userName)}
+        <div
+          className="flex items-center gap-[10px] "
+          onClick={() => handleGetProfile(author.userName)}
         >
           {/* profile and button */}
-          <div className="cursor-pointer  h-[70px] w-[70px] overflow-hidden bg-black rounded-full">
+          <div className="cursor-pointer h-[60px] w-[60px] overflow-hidden bg-black rounded-full">
             <img
               src={author.profileImage ? author.profileImage : dp}
               alt=""
@@ -87,16 +86,15 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
           <div className="font-semibold text-[18px] text-gray-800">
             {author.firstName + " "}
             {author.lastName}
-            <br />
-            <span className="text-[14px]">{author.headline}</span>
-            <br />
+            <div>
             <span className="text-xs text-gray-600">
               {moment(createdAt).fromNow()}
             </span>
           </div>
+          </div>
+          
         </div>
-        {userData._id != author._id && <ConnectionBtn userId={author._id}/>}
-        
+        {userData._id != author._id && <ConnectionBtn userId={author._id} />}
       </div>
       {/* description */}
       <div
@@ -132,10 +130,7 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
       <div className="w-full border-1 border-gray-600 my-[10px]"></div>
       <div className="flex items-center gap-[10px] p-[10px] text-gray-600">
         {/* like */}
-        <div
-          onClick={handleLike}
-          className="flex items-center gap-[10px]"
-        >
+        <div onClick={handleLike} className="flex items-center gap-[10px]">
           {likes.includes(userData._id) ? (
             <BiSolidLike className="text-[#0a66c2] text-2xl" />
           ) : (
@@ -177,7 +172,7 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
                   />
                 </div>
                 <span className="font-semibold">
-                  {c.user.firstName+" "}
+                  {c.user.firstName + " "}
                   {c.user.lastName}
                 </span>
               </div>

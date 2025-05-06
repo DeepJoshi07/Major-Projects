@@ -12,7 +12,7 @@ function Others() {
       const result = await axios.get(serverUrl + `/user/suggestedusers`, {
         withCredentials: true,
       });
-      console.log(result.data)
+      
       setSuggetions(result.data);
     } catch (error) {
       console.log(error);

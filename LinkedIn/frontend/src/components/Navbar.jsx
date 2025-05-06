@@ -41,9 +41,8 @@ function Navbar() {
         }
       );
       setSearchData(result.data);
-      
     } catch (error) {
-      setSearchData([])
+      setSearchData([]);
       console.log(error);
     }
   };
@@ -51,13 +50,13 @@ function Navbar() {
     handleSearch();
   }, [search, setSearch]);
   return (
-    <div className="h-[80px] w-full flex justify-around items-center mb-[10px] bg-white z-10 fixed top-0 shadow-lg">
+    <div className="h-[80px] px-[10px] w-full flex justify-around items-center mb-[10px] bg-white z-10 fixed top-0 shadow-lg">
       {searchData.length > 0 && (
-        <div className="bg-white min-h-[100px] w-[95%] p-[20px] left-[10px] md:w-[700px]  absolute top-[100px] md:left-[50px] flex flex-col items-center rounded-lg shadow-lg">
+        <div className="bg-white max-h-[500px] overflow-auto w-[95%] p-[20px] left-[10px] md:w-[700px]  absolute top-[100px] md:left-[50px] flex flex-col items-center rounded-lg shadow-lg">
           {searchData.map((s) => (
             <div
               key={s._id}
-              onClick={()=>handleGetProfile(s.userName)}
+              onClick={() => handleGetProfile(s.userName)}
               className=" w-full h-[80px] flex items-center hover:bg-gray-300 rounded-lg"
             >
               <div className="p-[10px] h-[60px] w-[60px] rounded-full overflow-hidden  flex flex-col justify-center items-center">
@@ -68,13 +67,11 @@ function Navbar() {
                 />
               </div>
               <div>
-              <div className="font-semibold pl-[10px]">
-                {s.firstName + " "}
-                {s.lastName}
-              </div>
-              <div className="pl-[10px]">
-                {s.headline}
-              </div>
+                <div className="font-semibold pl-[10px]">
+                  {s.firstName + " "}
+                  {s.lastName}
+                </div>
+                <div className="pl-[10px]">{s.headline}</div>
               </div>
               
             </div>
@@ -168,6 +165,7 @@ function Navbar() {
           <IoMdHome className="text-[25px]" />
           <div>Home</div>
         </div>
+        {/* network */}
         <div
           onClick={() => navigate("/network")}
           className="md:flex flex-col justify-center items-center text-gray-600 hidden"
@@ -175,10 +173,15 @@ function Navbar() {
           <FaUserGroup className="text-[25px]" />
           <div>My network</div>
         </div>
-        <div className="flex flex-col justify-center items-center text-gray-600">
+        {/* notification */}
+        <div
+          onClick={()=>navigate("/notification")}
+          className="flex flex-col justify-center items-center text-gray-600"
+        >
           <IoNotificationsSharp className="text-[25px] " />
           <div className="hidden md:block">Notification</div>
         </div>
+        {/* user profile */}
         <div
           className="h-[50px] w-[50px] rounded-full overflow-hidden flex flex-col justify-center items-center"
           onClick={() => {

@@ -2,12 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { userDataContext } from "../Context/UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { io } from "socket.io-client";
 
-let socket = io("http://localhost:4000");
 function ConnectionBtn({ userId }) {
   // userid is id of posts other
-  let { serverUrl, userData } = useContext(userDataContext);
+  let { serverUrl, userData,socket } = useContext(userDataContext);
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
 
@@ -30,7 +28,7 @@ function ConnectionBtn({ userId }) {
         serverUrl + `/connection/getstatus/${userId}`,
         { withCredentials: true }
       );
-      console.log(result);
+      
       setStatus(result.data.status);
     } catch (error) {
       console.log(error);
@@ -48,13 +46,6 @@ function ConnectionBtn({ userId }) {
       console.log(error);
     }
   };
-  // const handleSendConnection = async() => {
-  //     try {
-
-  //     } catch (error) {
-
-  //     }
-  // }
 
   const handleClick = async () => {
     if (status == "disconnect") {

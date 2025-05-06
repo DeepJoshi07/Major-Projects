@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser"
 import connectionRouter from "./routes/connectionRoutes.js"
 import http from 'http'
 import { Server } from "socket.io"
+import notificationRouter from "./routes/notificationRoutes.js"
 env.config()
 
 const app = express()
@@ -48,6 +49,7 @@ app.use("/",authRouter)
 app.use("/user",userRouter)
 app.use("/data",postRouter)
 app.use('/connection',connectionRouter)
+app.use('/notification',notificationRouter)
 
 
 server.listen(port,()=>{
