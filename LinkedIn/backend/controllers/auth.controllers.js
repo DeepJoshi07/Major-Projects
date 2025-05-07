@@ -33,7 +33,7 @@ export const signup = async(req,res)=>{
             httpOnly:true,
             sameSite:"none",
             maxAge:7*24*60*60*1000,
-            secure:process.env.NODE_ENVIROMENT === "production"
+            secure:process.env.NODE_ENV == "production"
         })
         user.save();
         return res.status(201).json({message:"user has been created"})
@@ -62,7 +62,7 @@ export const login = async(req,res)=>{
             httpOnly:true,
             sameSite:"none",
             maxAge:7*24*60*60*1000,
-            secure:process.env.NODE_ENVIROMENT === "production"
+            secure:process.env.NODE_ENV == "production"
         })
         return res.status(200).json({message:"user has logged in"})
     } catch (error) {
