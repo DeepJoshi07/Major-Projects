@@ -4,7 +4,7 @@ import { authDataContext } from './AuthContext'
 import { useNavigate } from 'react-router-dom';
 import { io } from "socket.io-client";
 
-let socket = io("https://linkedin-backend-5tew.onrender.com");
+let socket = io("https://linkedin-backend-oh3r.onrender.com");
 
 export const userDataContext = createContext()
 
