@@ -1,6 +1,7 @@
 import express from 'express'
 import env from 'dotenv'
 import userRouter from './routes/user.routes.js'
+import messageRouter from './routes/message.routes.js'
 import connectDb from './config/connect.js'
 import cookieparser from 'cookie-parser'
 
@@ -15,6 +16,7 @@ app.use(cookieparser())
 
 
 app.use("/auth",userRouter)
+app.use("/message",messageRouter)
 
 app.listen(port,()=>{
     connectDb()
