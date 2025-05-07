@@ -14,7 +14,7 @@ env.config()
 
 const app = express()
 app.use(cors({
-    origin:"https://linkedin-frontend-apo2.onrender.com",
+    origin:"https://linkedin-frontend-qjjv.onrender.com",
     credentials:true
 }))
 
@@ -22,7 +22,7 @@ app.use(cors({
 const server = http.createServer(app);
 export const io = new Server(server,{
     cors:{
-        origin:"https://linkedin-frontend-apo2.onrender.com",
+        origin:"https://linkedin-frontend-qjjv.onrender.com",
         credentials:true
     }
 })
