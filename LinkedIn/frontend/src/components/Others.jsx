@@ -13,7 +13,7 @@ function Others() {
         withCredentials: true,
       });
       
-      setSuggetions(result.data);
+      setSuggetions(result.data || []);
     } catch (error) {
       console.log(error);
     }
