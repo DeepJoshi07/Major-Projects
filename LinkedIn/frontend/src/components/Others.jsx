@@ -25,7 +25,7 @@ function Others() {
     <div className="w-full lg:w-[25%] max-h-[300px] p-[10px] rounded-lg lg:mt-[100px] mt-[20px] shadow-lg bg-white hidden lg:flex flex-col ">
      {suggetions.length > 0 && <h1 className="p-[10px] text-xl font-semibold">Suggested Users : </h1>} 
      {suggetions.length === 0 && <h1 className="p-[10px] text-xl font-semibold">No Suggested Users Found. </h1>} 
-      {suggetions.map((s) => (
+      {suggetions.length > 0 && suggetions.map((s) => (
         <div
           key={s._id}
           onClick={() => handleGetProfile(s.userName)}
