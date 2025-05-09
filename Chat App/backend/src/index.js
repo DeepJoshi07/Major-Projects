@@ -4,6 +4,7 @@ import userRouter from './routes/user.routes.js'
 import messageRouter from './routes/message.routes.js'
 import connectDb from './config/connect.js'
 import cookieparser from 'cookie-parser'
+import cors from 'cors'
 
 env.config()
 const port = process.env.PORT 
@@ -13,10 +14,13 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieparser())
-
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true
+}))
 
 app.use("/auth",userRouter)
-app.use("/message",messageRouter)
+app.use("/messages",messageRouter)
 
 app.listen(port,()=>{
     connectDb()

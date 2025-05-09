@@ -113,9 +113,9 @@ export const updateProfile = async(req,res) => {
             profileImage:uploadResponse.secure_url
         },{
             new:true
-        }).select('-password')
+        }).select("-password")
 
-        res.status(500).json(user)
+        res.status(200).json(user)
     } catch (error) {
         console.log(error);
         return res.status(500).json({message:'internal server error'})
