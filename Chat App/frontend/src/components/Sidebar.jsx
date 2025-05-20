@@ -8,16 +8,17 @@ import blankProfile from '../assets/blank-profile.webp'
 const Sidebar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
 
-  const { onlineUsers } = useAuthStore();
+  const { onlineUsers, authUser } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
     getUsers();
+
   }, [getUsers]);
 
   const filteredUsers = showOnlineOnly
     ? users.filter((user) => onlineUsers.includes(user._id))
-    : users;
+    : users.filter((user)=> user._id !== authUser._id);
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
@@ -56,7 +57,7 @@ const Sidebar = () => {
           >
             <div className="relative mx-auto lg:mx-0">
               <img
-                src={user.profilePic || blankProfile}
+                src={user.profileImage || blankProfile}
                 alt={user.name}
                 className="size-12 object-cover rounded-full"
               />
