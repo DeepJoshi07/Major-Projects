@@ -5,10 +5,11 @@ import messageRouter from './routes/message.routes.js'
 import connectDb from './config/connect.js'
 import cookieparser from 'cookie-parser'
 import cors from 'cors'
+import { app, server } from './lib/socket.js'
 
 env.config()
 const port = process.env.PORT 
-const app = express()
+
 
 
 app.use(express.json())
@@ -22,7 +23,7 @@ app.use(cors({
 app.use("/auth",userRouter)
 app.use("/messages",messageRouter)
 
-app.listen(port,()=>{
+server.listen(port,()=>{
     connectDb()
     console.log(`your app is listening on port ${port}`);
     
