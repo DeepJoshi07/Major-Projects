@@ -80,7 +80,7 @@ function Notifications() {
       </div>
       {notifications.length > 0 && (
         <div className="bg-white w-[95%] lg:w-[800px] overflow-auto min-h-[80px] my-[10px] shadow-lg rounded-lg flex flex-col justify-between items-center px-[20px]">
-          {notifications.map((n, index) => {
+          {notifications.length > 0 && notifications.map((n, index) => {
             return (
               <div
                 key={index}
