@@ -32,7 +32,7 @@ function Posts() {
           Start a new post...
         </div>
       </div>
-      {postData.map((post) => (
+      {postData && postData.map((post) => (
         <AllPost
           key={uuidv4()}
           id={post._id}
