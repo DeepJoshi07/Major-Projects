@@ -53,7 +53,7 @@ function Navbar() {
     <div className="h-[80px] px-[10px] w-full flex justify-around items-center mb-[10px] bg-white z-10 fixed top-0 shadow-lg">
       {searchData.length > 0 && (
         <div className="bg-white max-h-[500px] overflow-auto w-[95%] p-[20px] left-[10px] md:w-[700px]  absolute top-[100px] md:left-[50px] flex flex-col items-center rounded-lg shadow-lg">
-          {searchData.map((s) => (
+          {searchData.length > 0 && searchData.map((s) => (
             <div
               key={s._id}
               onClick={() => handleGetProfile(s.userName)}
