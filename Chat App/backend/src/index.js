@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieparser())
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://chat-app-frontend-alsb.onrender.com",
     credentials:true
 }))
 
