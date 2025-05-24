@@ -161,7 +161,7 @@ function AllPost({ id, author, like, comment, description, createdAt, image }) {
       {/* show comments */}
       {showComments ? (
         <div className="flex flex-col justify-center gap-[20px] px-[10px] mt-[20px]">
-          {comments.map((c, index) => (
+          {comments.length > 0 && comments.map((c, index) => (
             <div key={index}>
               <div className="flex gap-[10px]">
                 <div className="cursor-pointer  h-[30px] w-[30px] overflow-hidden bg-black rounded-full">

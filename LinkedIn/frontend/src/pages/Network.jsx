@@ -49,7 +49,7 @@ function Network() {
         <div className="flex  items-center text-2xl text-gray-800 font-semibold h-[80px] w-[90%] rounded-lg border-none pl-[20px] mt-[90px] my-[10px] bg-white shadow-lg">
           Invitations: {" " + invitations.length}
         </div>
-        {invitations.map((invite, index) => {
+        {invitations.length > 0 && invitations.map((invite, index) => {
           return (
             <div
               key={index}
