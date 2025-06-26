@@ -27,11 +27,11 @@ const productSchema = new Schema({
         type:String,
         required:true,
     },
-    size:{
+    sizes:{
         type:Array,
         required:true
     },
-    bestSeller:{
+    bestseller:{
         type:Boolean
     },
     date:{
