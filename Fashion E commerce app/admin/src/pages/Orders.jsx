@@ -5,13 +5,13 @@ import { backendUrl, currency } from '../App'
 import { toast } from 'react-toastify'
 import { assets } from '../assets/assets'
 
-const Orders = () => {
+const Orders = ({token}) => {
 
   const [orders, setOrders] = useState([])
 
   const fetchAllOrders = async () => {
     try {
-      const response = await axios.post(backendUrl + '/order/list', {})
+      const response = await axios.post(backendUrl + '/order/list', {},{headers:{token}})
       if (response.data.success) {
         setOrders(response.data.orders.reverse())
       } else {

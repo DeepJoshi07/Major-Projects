@@ -12,13 +12,7 @@ export const productAdd = async (req, res) => {
       sizes,
       bestseller,
     } = req.body;
-    console.log(name,
-      description,
-      price,
-      category,
-      subCategory,
-      sizes,
-      bestseller,)
+
     const image1 = req.files.image1 && req.files.image1[0];
     const image2 = req.files.image2 && req.files.image2[0];
     const image3 = req.files.image3 && req.files.image3[0];

@@ -1,11 +1,48 @@
-import  { useState } from 'react'
+import  { useContext, useState } from 'react'
+import { ShopContext } from '../context/ShopContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Login = () => {
+
+    const [password,setPassword] = useState('')
+    const [email,setEmail] = useState('')
+    const [name,setName] = useState('')
+
+    const {navigate,setToken,token, backendUrl} = useContext(ShopContext)
 
     const [currentState, setCurrentState] = useState('Login');
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
+        try {
+            if(currentState === "Sign Up"){
+                const result = await axios.post(backendUrl + "/user/registerUser",{name,email,password},{headers:{token}})
+            
+            if(result.data.success == "true"){
+                setToken(result.data.token)
+                toast.success("You have Signed in")
+                navigate("/")
+            }else{
+                toast.error("something went wrong!")
+            }
+            }else{
+                const result = await axios.post(backendUrl + "/user/loginUser",{email,password},{headers:{token}})
+              console.log(result.data.success)
+            if(result.data.success == "true"){
+                console.log("!!!!!!!!!!")
+                toast.success("You logged in")
+                setToken(result.data.token)
+                navigate("/")
+            }else{
+                toast.error("something went wrong!")
+            }
+            }
+            
+        } catch (error) {
+            toast.error(error.message)
+            console.log(error)
+        }
     }
 
     return (
@@ -14,9 +51,9 @@ const Login = () => {
                 <p className='prata-regular text-3xl'>{currentState}</p>
                 <hr className=' border-none h-[1.5px] w-8 bg-gray-800' />
             </div>
-            {currentState === 'Login' ? null : <input className='w-full px-3 py-2 border border-gray-800' type="text" placeholder='Name' required />}
-            <input className='w-full px-3 py-2 border border-gray-800' type="email" placeholder='Email' required />
-            <input className='w-full px-3 py-2 border border-gray-800' type="password" placeholder='Password' required />
+            {currentState === 'Login' ? null : <input value={name} onChange={(e)=>setName(e.target.value)} className='w-full px-3 py-2 border border-gray-800' type="text" placeholder='Name' required />}
+            <input value={email} onChange={(e)=>setEmail(e.target.value)} className='w-full px-3 py-2 border border-gray-800' type="email" placeholder='Email' required />
+            <input value={password} onChange={(e)=>setPassword(e.target.value)} className='w-full px-3 py-2 border border-gray-800' type="password" placeholder='Password' required />
             <div className='w-full flex justify-between text-sm mt-[-8px]'>
                 <p className='cursor-pointer'>Forgot your password?</p>
                 {

@@ -36,15 +36,8 @@ export const registerUser = async (req, res) => {
     const user = await newUser.save();
 
     const token = createToken(user._id);
-    console.log(token);
-    res.cookie("fashion", token, {
-      maxAge: 1000 * 60 * 60 * 24 * 7,
-      secure: false,
-      httpOnly: true,
-      sameSite: process.env.NODE_ENV === "production",
-    });
 
-    res.json("You have Registered!");
+    res.json({message:"You have Registered!",success:"true",token});
   } catch (error) {
     console.log(error.message);
   }
@@ -77,18 +70,22 @@ export const loginUser = async (req, res) => {
     }
 
     const token = createToken(exist._id);
-    res.cookie("fashion", token, {
-      maxAge: 1000 * 60 * 60 * 24 * 7,
-      secure: false,
-      httpOnly: true,
-      sameSite: process.env.NODE_ENV === "production",
-    });
 
-    res.json("You have loggedin!");
+    res.json({message:"You have loggedin!",success:"true",token});
   } catch (error) {
     console.log(error.message);
   }
 };
+
+export const userLogout = async(req,res) => {
+  try {
+    console.log("called!")
+    res.clearCookie("fashion")
+    res.json({message:'You have been logged-out!',success:"true"})
+  } catch (error) {
+    console.log(error.message)
+  }
+}
 
 export const adminLogin = async (req, res) => {
   try {
@@ -106,12 +103,7 @@ export const adminLogin = async (req, res) => {
       password === process.env.ADMIN_PASSWORD
     ) {
       const token = jwt.sign(email + password, process.env.JWT_SECRET);
-      res.cookie("adminCookie", token, {
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-        secure: false,
-        httpOnly: true,
-        sameSite: process.env.NODE_ENV === "production",
-      });
+      
       res.json("Loggedin successfuly!");
     }else{
         res.json({message:"invalid cradentials!",token})
@@ -121,11 +113,3 @@ export const adminLogin = async (req, res) => {
   }
 };
 
-export const adminLogout = async(req,res) => {
-  try {
-    res.clearCookie("adminCookie")
-    res.json('You have been logged-out!')
-  } catch (error) {
-    console.log(error.message)
-  }
-}
