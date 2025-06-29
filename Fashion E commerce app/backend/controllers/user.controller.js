@@ -37,7 +37,7 @@ export const registerUser = async (req, res) => {
 
     const token = createToken(user._id);
 
-    res.json({message:"You have Registered!",success:"true",token});
+    res.json({message:"You have Registered!",success:true,token});
   } catch (error) {
     console.log(error.message);
   }
@@ -71,21 +71,11 @@ export const loginUser = async (req, res) => {
 
     const token = createToken(exist._id);
 
-    res.json({message:"You have loggedin!",success:"true",token});
+    res.json({message:"You have loggedin!",success:true,token});
   } catch (error) {
     console.log(error.message);
   }
 };
-
-export const userLogout = async(req,res) => {
-  try {
-    console.log("called!")
-    res.clearCookie("fashion")
-    res.json({message:'You have been logged-out!',success:"true"})
-  } catch (error) {
-    console.log(error.message)
-  }
-}
 
 export const adminLogin = async (req, res) => {
   try {
@@ -104,9 +94,9 @@ export const adminLogin = async (req, res) => {
     ) {
       const token = jwt.sign(email + password, process.env.JWT_SECRET);
       
-      res.json("Loggedin successfuly!");
+      res.json({message:"Loggedin successfuly!",token});
     }else{
-        res.json({message:"invalid cradentials!",token})
+        res.json({message:"invalid cradentials!"})
     }
   } catch (error) {
     console.log(error.message);

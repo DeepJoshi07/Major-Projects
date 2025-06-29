@@ -40,16 +40,15 @@ const Navbar = () => {
                 <img onClick={() => { setShowSearch(true); navigate('/collection') }} className='w-5 cursor-pointer' src={assets.search_icon} alt="" />
                 <div className='group relative'>
                     <img onClick={token === ""?() => { navigate('/login') }:() => { navigate('/') }} className='w-5 cursor-pointer' src={assets.profile_icon} alt="" />
-                        {/* onClick={() => { navigate('/login')}} */}
                          
                     {/* Dropdown Menu */}
-                    <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
+                    {token !== '' ?<div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
                         <div className='flex flex-col gap-2 w-36 py-3 px-5  bg-slate-100 text-gray-500 rounded'>
                             <p onClick={() => { }} className='cursor-pointer hover:text-black'>My Profile</p>
                             <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
-                            {token !== ""?<p onClick={()=>setToken('')} className='cursor-pointer hover:text-black'>Logout</p>:null}
+                            <p onClick={()=>setToken('')} className='cursor-pointer hover:text-black'>Logout</p>
                         </div>
-                    </div>
+                    </div>:null}
                 </div>
                 <Link to='/cart' className='relative'>
                     <img className='w-5 min-w-5' src={assets.cart_icon} alt="" />

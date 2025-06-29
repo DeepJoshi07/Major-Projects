@@ -12,6 +12,7 @@ const Login = ({setToken}) => {
         try {
             e.preventDefault();
             const result = await axios.post(backendUrl + '/user/adminLogin',{email,password})
+            
             setToken(result.data.token)
         } catch (error) {
             console.log(error);
