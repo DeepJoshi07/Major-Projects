@@ -4,6 +4,7 @@ import axios from 'axios'
 import { backendUrl, currency } from '../App'
 import { toast } from 'react-toastify'
 import { assets } from '../assets/assets'
+import { useEffect } from 'react'
 
 const Orders = ({token}) => {
 
@@ -34,6 +35,9 @@ const Orders = ({token}) => {
     }
   }
 
+  useEffect(()=>{
+    fetchAllOrders()
+  },[token])
   return (
     <div>
       <h3>Order Page</h3>
