@@ -77,6 +77,29 @@ const PlaceOrder = () => {
           }
           break;
         }
+        case "stripe": {
+          const stripeResult = await axios.post(
+            backendUrl + "/order/stripe",
+            orderData,
+            { headers: { token } }
+          );
+          if (stripeResult.data.success) {
+            const { session_url } = stripeResult.data;
+            window.location.replace(session_url);
+          } else {
+            toast.error("something went wrong");
+          }
+          break;
+        }
+        case "rezorpay": {
+          const stripeResult = await axios.post(
+            backendUrl + "/order/razorpay",
+            orderData,
+            { headers: { token } }
+          );
+          
+          break;
+        }
         default:
           break;
       }

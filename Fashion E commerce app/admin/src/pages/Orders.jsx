@@ -25,7 +25,7 @@ const Orders = ({token}) => {
 
   const statusHandler = async ( event, orderId ) => {
     try {
-      const response = await axios.post(backendUrl + '/order/status' , {orderId, status:event.target.value})
+      const response = await axios.post(backendUrl + '/order/status' ,{orderId, status:event.target.value},{headers:{token}})
       if (response.data.success) {
         await fetchAllOrders()
       }
