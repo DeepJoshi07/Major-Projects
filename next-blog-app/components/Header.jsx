@@ -7,7 +7,7 @@ const Header = () => {
     <div className="py-5 px-5 md:px-12 lg:px-28">
       <div className="flex justify-between items-center">
         <div className="w-[130px] sm:w-auto">
-          <Image src={assets.logo} width={180} alt="" />
+          <Image src={assets.logo} alt='' width={180} alt="" />
         </div>
 
         <button className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]">
