@@ -1,0 +1,189 @@
+[
+  {
+    "_id": "687217d3ed0c9f1dc7afc96b",
+    "title": "A detailed step by step guide to manage your lifestyle",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Lifestyle",
+    "author": "Alex Bennett",
+    "image": "/1752307667741_blog_pic_1.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "687217faed0c9f1dc7afc96e",
+    "title": "Enhancing your skills and capturing memorable moments",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Lifestyle",
+    "author": "Alex Bennett",
+    "image": "/1752307706690_blog_pic_5.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721824ed0c9f1dc7afc970",
+    "title": "A comprehensive roadmap for effective lifestyle management",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Lifestyle",
+    "author": "Alex Bennett",
+    "image": "/1752307748663_blog_pic_8.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721844ed0c9f1dc7afc972",
+    "title": "Beyond the Ordinary: Crafting Your Exceptional Lifestyle",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Lifestyle",
+    "author": "Alex Bennett",
+    "image": "/1752307780824_blog_pic_10.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721870ed0c9f1dc7afc974",
+    "title": "Balance & Bliss: Navigating Life's Journey with Style",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Lifestyle",
+    "author": "Alex Bennett",
+    "image": "/1752307824847_blog_pic_14.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "687218bfed0c9f1dc7afc976",
+    "title": "Learning new technology to boost your career in software",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Technology",
+    "author": "Alex Bennett",
+    "image": "/1752307903550_blog_pic_3.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "687218e8ed0c9f1dc7afc978",
+    "title": "Tips for getting the most out of apps and software",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Technology",
+    "author": "Alex Bennett",
+    "image": "/1752307944769_blog_pic_4.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "6872190fed0c9f1dc7afc97a",
+    "title": "Technology for Career advancement in development",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Technology",
+    "author": "Alex Bennett",
+    "image": "/1752307983252_blog_pic_7.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721937ed0c9f1dc7afc97c",
+    "title": "How to design an online Learning Platform today",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Technology",
+    "author": "Alex Bennett",
+    "image": "/1752308023293_blog_pic_12.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721957ed0c9f1dc7afc97e",
+    "title": "Exploring the Evolution of social networking in the Future",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Technology",
+    "author": "Alex Bennett",
+    "image": "/1752308055455_blog_pic_15.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "687219c4ed0c9f1dc7afc980",
+    "title": "How to create an effective startup roadmap or ideas",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Startup",
+    "author": "Alex Bennett",
+    "image": "/1752308164171_blog_pic_2.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "687219eeed0c9f1dc7afc982",
+    "title": "Maximizing returns by minimizing resources in your startup",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Startup",
+    "author": "Alex Bennett",
+    "image": "/1752308206399_blog_pic_6.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721a0ded0c9f1dc7afc984",
+    "title": "Achieving maximum returns with minimal resources",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Startup",
+    "author": "Alex Bennett",
+    "image": "/1752308237004_blog_pic_9.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721a26ed0c9f1dc7afc986",
+    "title": "Unveiling the Secrets of Successful Startups in Technolgy",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Startup",
+    "author": "Alex Bennett",
+    "image": "/1752308262240_blog_pic_11.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721a43ed0c9f1dc7afc988",
+    "title": "Tomorrow's Algorithms: Shaping the Landscape of Future AI",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Startup",
+    "author": "Alex Bennett",
+    "image": "/1752308291009_blog_pic_13.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "68721a88ed0c9f1dc7afc98a",
+    "title": "Shaping the Future of statup ecosystem in the world",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
+    "category": "Startup",
+    "author": "Alex Bennett",
+    "image": "/1752308360237_blog_pic_16.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-12T08:07:47.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "6874a70993f4c18cf80fed9e",
+    "title": "testing",
+    "description": "test blog is written here",
+    "category": "Startup",
+    "author": "Alex Bennett",
+    "image": "/1752475401185_blog_pic_1.png",
+    "authorImg": "/author_img.png",
+    "date": "2025-07-14T06:41:37.338Z",
+    "__v": 0
+  }
+]
