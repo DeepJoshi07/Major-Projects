@@ -39,7 +39,7 @@ model User {
 }
 
 model Post {
-  id        String     @id @map("_id")
+  id        String     @id @map("_id") @db.ObjectId @default(auto())
   desc      String
   img       String?
   createdAt DateTime   @default(now())
@@ -51,7 +51,7 @@ model Post {
 }
 
 model Comments {
-  id        String   @id  @map("_id")
+  id        String   @id  @map("_id") @default(auto()) @db.ObjectId
   desc      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -63,18 +63,18 @@ model Comments {
 }
 
 model Like {
-  id         String    @id @map("_id")
+  id         String    @id @map("_id") @default(auto()) @db.ObjectId
   createdAt  DateTime  @default(now())
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String    
   post       Post?     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId     String?   
+  postId     String?   @db.ObjectId
   Comments   Comments? @relation(fields: [commentsId], references: [id], onDelete: Cascade)
-  commentsId String?   
+  commentsId String?   @db.ObjectId
 }
 
 model Follower {
-  id          String   @id  @map("_id")
+  id          String   @id  @map("_id") @db.ObjectId @default(auto())
   createdAt   DateTime @default(now())
   follower    User     @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
   followerId  String   
@@ -83,7 +83,7 @@ model Follower {
 }
 
 model FollowerRequest {
-  id         String   @id  @map("_id")
+  id         String   @id  @map("_id") @default(auto()) @db.ObjectId
   createdAt  DateTime @default(now())
   sender     User     @relation("FollowRequestSent", fields: [senderId], references: [id], onDelete: Cascade)
   senderId   String  
@@ -94,7 +94,7 @@ model FollowerRequest {
 }
 
 model Block {
-  id        String   @id  @map("_id")
+  id        String   @id  @map("_id") @default(auto()) @db.ObjectId
   createdAt DateTime @default(now())
   blocker   User     @relation("BlocksSent", fields: [blockerId], references: [id], onDelete: Cascade)
   blockerId String   
@@ -105,7 +105,7 @@ model Block {
 }
 
 model Stories {
-  id        String   @id  @map("_id")
+  id        String   @id  @map("_id") @default(auto()) @db.ObjectId
   img       String
   createdAt DateTime @default(now())
   expiresAt DateTime
