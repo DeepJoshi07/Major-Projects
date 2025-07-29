@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "@/components/MobileMenu";
 import Image from "next/image";
 import {
   ClerkLoaded,

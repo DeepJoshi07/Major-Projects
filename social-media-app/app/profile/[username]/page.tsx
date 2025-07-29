@@ -1,5 +1,5 @@
 import React from 'react'
-import Feed from "@/components/Feed";
+import Feed from "@/components/feed/Feed";
 import LeftMenu from "@/components/leftMenu/Left-menu";
 import RightMenu from "@/components/rightMenu/Right-menu";
 import Image from 'next/image';
