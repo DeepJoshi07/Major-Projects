@@ -7,13 +7,14 @@ import prisma from "@/library/client";
 import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 
+
 const ProfilePage = async ({
   params,
 }: {
   params: Promise<{ username: string }>;
 }) => {
   const username = (await params).username;
-  const user = await prisma.user.findFirst({
+  const otherUser = await prisma.user.findFirst({
     where: {
       username,
     },
@@ -27,7 +28,7 @@ const ProfilePage = async ({
       },
     },
   });
-  if (!user) return null;
+  if (!otherUser) return null;
 
   const {userId:currntUserId} = await auth()
 
@@ -36,7 +37,7 @@ const ProfilePage = async ({
   if(currntUserId){
     const res = await prisma.block.findFirst({
       where:{
-        blockerId:user.id,
+        blockerId:otherUser.id,
         blockedId: currntUserId
       }
     })
@@ -56,7 +57,7 @@ const ProfilePage = async ({
             <div className="w-full h-64 relative">
               <Image
                 src={
-                  user.cover || './noCover.png'
+                  otherUser.cover || './noCover.png'
                 }
                 alt=""
                 fill
@@ -64,7 +65,7 @@ const ProfilePage = async ({
               />
               <Image
                 src={
-                   user.avatar || './noCover.png'
+                   otherUser.avatar || './noCover.png'
                 }
                 alt=""
                 width={128}
@@ -72,18 +73,18 @@ const ProfilePage = async ({
                 className="w-32 h-32 rounded-full absolute left-0 right-0 m-auto -bottom-16 ring-4 ring-white object-cover"
               />
             </div>
-            <h1 className="mt-20 mb-4 text-2xl font-medium">{user.name && user.surname?user.name +" "+ user.surname:user.username }</h1>
+            <h1 className="mt-20 mb-4 text-2xl font-medium">{otherUser.name && otherUser.surname?otherUser.name +" "+ otherUser.surname:otherUser.username }</h1>
             <div className="flex items-center justify-center gap-12 mb-4">
               <div className="flex flex-col items-center">
-                <span className="font-medium">{user._count.post}</span>
+                <span className="font-medium">{otherUser._count.post}</span>
                 <span className="text-sm">Posts</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="font-medium">{user._count.followers}</span>
+                <span className="font-medium">{otherUser._count.followers}</span>
                 <span className="text-sm">Followers</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="font-medium">{user._count.followings}</span>
+                <span className="font-medium">{otherUser._count.followings}</span>
                 <span className="text-sm">Following</span>
               </div>
             </div>
@@ -92,7 +93,7 @@ const ProfilePage = async ({
         </div>
       </div>
       <div className="hidden lg:block w-[30%]">
-        <RightMenu user={user}/>
+        <RightMenu otherUser={otherUser}/>
       </div>
     </div>
   );

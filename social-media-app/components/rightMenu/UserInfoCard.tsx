@@ -5,9 +5,10 @@ import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import UserInfoCardInteraction from "./UserInfoCardInteraction";
+import UpdateUser from "./UpdateUser";
 
-const UserInfoCard = async ({ user }: { user: User }) => {
-  const createdDate = new Date(user.createdAt);
+const UserInfoCard = async ({ otherUser }: { otherUser: User }) => {
+  const createdDate = new Date(otherUser.createdAt);
   const formattedDate = createdDate.toLocaleDateString("en-us", {
     year: "numeric",
     month: "numeric",
@@ -21,26 +22,27 @@ const UserInfoCard = async ({ user }: { user: User }) => {
   if (currentUserId) {
     const blockRes = await prisma.block.findFirst({
       where: {
-        blockedId: user.id,
-        blockerId: currntUserId,
+        blockedId: otherUser.id,
+        blockerId: currentUserId,
       },
     });
     blockRes ? (isUserBlocked = true) : (isUserBlocked = false);
 
     const followerRes = await prisma.follower.findFirst({
       where: {
-        followerId: currntUserId,
-        followingId: user.id,
+        followerId: currentUserId,
+        followingId: otherUser.id,
       },
     });
     followerRes ? (isFollowing = true) : (isFollowing = false);
 
     const followerReq = await prisma.followerRequest.findFirst({
       where: {
-        senderId: currntUserId,
-        receiverId: user.id,
+        senderId: currentUserId,
+        receiverId: otherUser.id,
       },
     });
+
     followerReq ? (isFollowingReqSent = true) : (isFollowingReqSent = false);
   }
 
@@ -49,54 +51,58 @@ const UserInfoCard = async ({ user }: { user: User }) => {
       {/* TOP */}
       <div className="flex justify-between items-center font-medium">
         <span className="text-gray-500">User Information</span>
-        <Link href="/" className="text-blue-500 text-xs">
-          See all
-        </Link>
+        {currentUserId === otherUser.id ? (
+          <UpdateUser otherUser={otherUser} />
+        ) : (
+          <Link href="/" className="text-blue-500 text-xs">
+            See all
+          </Link>
+        )}
       </div>
       {/* BOTTOM */}
       <div className="flex flex-col gap-4 text-gray-500">
         <div className="flex items-center gap-2">
           <span className="text-xl text-black">
-            {user.name && user.surname
-              ? user.name + " " + user.surname
-              : user.username}
+            {otherUser.name && otherUser.surname
+              ? otherUser.name + " " + otherUser.surname
+              : otherUser.username}
           </span>
-          <span className="text-sm">@{user.username}</span>
+          <span className="text-sm">@{otherUser.username}</span>
         </div>
-        {user.description && <p>{user.description}</p>}
-        {user.city && (
+        {otherUser.description && <p>{otherUser.description}</p>}
+        {otherUser.city && (
           <div className="flex items-center gap-2">
             <Image src="/map.png" alt="" width={16} height={16} />
             <span>
-              Living in <b>{user.city}</b>
+              Living in <b>{otherUser.city}</b>
             </span>
           </div>
         )}
 
-        {user.school && (
+        {otherUser.school && (
           <div className="flex items-center gap-2">
             <Image src="/school.png" alt="" width={16} height={16} />
             <span>
-              Went to <b>{user.school}</b>
+              Went to <b>{otherUser.school}</b>
             </span>
           </div>
         )}
 
-        {user.work && (
+        {otherUser.work && (
           <div className="flex items-center gap-2">
             <Image src="/work.png" alt="" width={16} height={16} />
             <span>
-              Works at <b>{user.work}</b>
+              Works at <b>{otherUser.work}</b>
             </span>
           </div>
         )}
 
         <div className="flex items-center justify-between">
-          {user.website && (
+          {otherUser.website && (
             <div className="flex gap-1 items-center">
               <Image src="/link.png" alt="" width={16} height={16} />
               <Link href="/" className="text-blue-500 font-medium">
-                {user.website}
+                {otherUser.website}
               </Link>
             </div>
           )}
@@ -107,20 +113,14 @@ const UserInfoCard = async ({ user }: { user: User }) => {
           </div>
         </div>
 
-        <button className="bg-blue-500 text-white text-sm rounded-md p-2">
-          Follow
-        </button>
-        <span className="text-red-400 self-end text-xs cursor-pointer">
-          Block User
-        </span>
-        {currentUserId && <UserInfoCardInteraction
-          currentUserId={currentUserId}
-          userId={user.id}
-          isUserBlocked={isUserBlocked}
-          isFollowing={isFollowing}
-          isFollowingReqSent={isFollowingReqSent}
-        />}
-        
+        {currentUserId && currentUserId !== otherUser.id && (
+          <UserInfoCardInteraction
+            userId={otherUser.id}
+            isUserBlocked={isUserBlocked}
+            isFollowing={isFollowing}
+            isFollowingReqSent={isFollowingReqSent}
+          />
+        )}
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ type UserStates = {
 
 const UserInfoCardInteraction = ({
   userId,
-  currentUserId,
   isUserBlocked,
   isFollowing,
   isFollowingReqSent,
@@ -20,7 +19,7 @@ const UserInfoCardInteraction = ({
   isUserBlocked: boolean;
   isFollowing: boolean;
   isFollowingReqSent: boolean;
-  currentUserId: string;
+  
 }) => {
   const [userState, setUserState] = useState<UserStates>({
     following: isFollowing,

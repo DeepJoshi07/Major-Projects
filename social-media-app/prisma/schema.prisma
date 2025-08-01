@@ -58,7 +58,7 @@ model Comments {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String   
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String   
+  postId    String   @db.ObjectId
   likes     Like[]
 }
 

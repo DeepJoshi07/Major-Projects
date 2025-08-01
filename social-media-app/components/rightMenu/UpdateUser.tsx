@@ -2,16 +2,17 @@
 
 import Image from "next/image";
 import UpdateButton from "@/components/rightMenu/UpdateButton";
+import { User } from "@prisma/client";
+import { useState } from "react";
 
-const UpdateUser = ({ user }: { user: User }) => {
+const UpdateUser = ({ otherUser }: { otherUser: User }) => {
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="">
       <span
-        className="text-blue-500 text-xs cursor-pointer"
-      >
-        Update
-      </span>
+      onClick={()=>setOpen(true)} 
+      className="text-blue-500 text-xs cursor-pointer">Update</span>
       {open && (
         <div className="absolute w-screen h-screen top-0 left-0 bg-black bg-opacity-65 flex items-center justify-center z-50 ">
           <form
@@ -39,7 +40,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                     <label htmlFor="">Cover Picture</label>
                     <div className="flex items-center gap-2 cursor-pointer">
                       <Image
-                        src={user.cover || "/noCover.png"}
+                        src={otherUser.cover || "/noCover.png"}
                         alt=""
                         width={48}
                         height={32}
@@ -63,7 +64,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder={user.name || "John"}
+                  placeholder={otherUser.name || "John"}
                   className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
                   name="name"
                 />
@@ -74,7 +75,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder={user.surname || "Doe"}
+                  placeholder={otherUser.surname || "Doe"}
                   className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
                   name="surname"
                 />
@@ -86,7 +87,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder={user.description || "Life is beautiful..."}
+                  placeholder={otherUser.description || "Life is beautiful..."}
                   className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
                   name="description"
                 />
@@ -98,7 +99,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder={user.city || "New York"}
+                  placeholder={otherUser.city || "New York"}
                   className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
                   name="city"
                 />
@@ -111,7 +112,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder={user.school || "MIT"}
+                  placeholder={otherUser.school || "MIT"}
                   className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
                   name="school"
                 />
@@ -124,7 +125,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder={user.work || "Apple Inc."}
+                  placeholder={otherUser.work || "Apple Inc."}
                   className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
                   name="work"
                 />
@@ -137,13 +138,13 @@ const UpdateUser = ({ user }: { user: User }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder={user.website || "lama.dev"}
+                  placeholder={otherUser.website || "lama.dev"}
                   className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
                   name="website"
                 />
               </div>
             </div>
-            <UpdateButton/>
+            <UpdateButton />
             {state.success && (
               <span className="text-green-500">Profile has been updated!</span>
             )}
