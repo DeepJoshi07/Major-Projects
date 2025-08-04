@@ -1,90 +1,65 @@
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 import Comments from "@/components/feed/Comments";
+import { Post, User } from "@prisma/client";
+import PostInteraction from "./PostIntraction";
+import PostInfo from "./PostInfo";
+import { auth } from "@clerk/nextjs/server";
 
+type PostType = Post & { user: User } & { likes: { userId: string }[] } & {
+  _count: { comments: number };
+};
 
-const Post = () => {
+const Posts =  async ({ posts }: { posts: PostType }) => {
+  const {userId} = await auth();
   return (
     <div className="flex flex-col gap-4">
       {/* User */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Image
-            src="https://images.pexels.com/photos/32487743/pexels-photo-32487743.jpeg"
+            src={posts?.user.avatar || "/noAvatar.png"}
             alt=""
             width={40}
             height={40}
             className="w-10 h-10 rounded-full"
           />
-          <span className="font-medium">Deep Joshi</span>
+          <span className="font-medium">
+            {posts.user.name && posts.user.surname
+              ? posts.user.name + " " + posts.user.surname
+              : posts.user.username}
+          </span>
         </div>
-        <Image src="/more.png" alt="" width={16} height={16} />
+        {userId === posts.user.id && <PostInfo postId={posts.id}/>}
+        
       </div>
       {/* DESC */}
       <div className="flex flex-col gap-4">
-        <div className="full min-h-96 relative">
-          <Image
-            src="https://images.pexels.com/photos/32487743/pexels-photo-32487743.jpeg"
-            alt=""
-            className="object-cover rounded-md"
-            fill
-          />
-        </div>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt
-          voluptatem nesciunt, vel quia maxime sequi amet ipsum repellendus, a
-          autem fugiat dicta non doloribus id aut nihil eum ex! Animi.
-        </p>
+        {posts.img && (
+          <div className="full min-h-96 relative">
+            <Image
+              src={posts.img}
+              alt=""
+              className="object-cover rounded-md"
+              fill
+            />
+          </div>
+        )}
+        <p>{posts.desc}</p>
       </div>
       {/* INTERACTION */}
-      <div className="flex items-center justify-between text-sm my-4">
-        <div className="flex gap-8">
-          <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
-            <Image
-              src="/like.png"
-              alt=""
-              width={16}
-              height={16}
-              className="cursor-pointer"
-            />
-            <span className="text-gray-300">|</span>
-            <span className="text-gray-300">
-              123 <span className="hidden md:inline">Likes</span>
-            </span>
-          </div>
-          <div className="flex items-center gap-4 bg-slate-100 p-2 rounded-xl">
-            <Image
-              src="/comment.png"
-              alt=""
-              width={16}
-              height={16}
-              className="cursor-pointer"
-            />
-            <span className="text-gray-300">|</span>
-            <span className="text-gray-300">
-              123 <span className="hidden md:inline">Comments</span>
-            </span>
-          </div>
-        </div>
-        <div className="">
-          <div className="flex items-center gap-4 bg-slate-100 p-2 rounded-xl">
-            <Image
-              src="/share.png"
-              alt=""
-              width={16}
-              height={16}
-              className="cursor-pointer"
-            />
-            <span className="text-gray-300">|</span>
-            <span className="text-gray-300">
-              123 <span className="hidden md:inline">Shares</span>
-            </span>
-          </div>
-        </div>
-      </div>
-      <Comments/>
+      <Suspense fallback="Loading...">
+        <PostInteraction
+          commentNumber={posts._count.comments}
+          postId={posts.id}
+          likes={posts.likes.map((l) => l.userId)}
+        />
+      </Suspense>
+      <Suspense fallback="Loading...">
+        <Comments />
+      </Suspense>
     </div>
   );
 };
 
-export default Post;
+export default Posts;

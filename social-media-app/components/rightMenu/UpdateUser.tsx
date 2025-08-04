@@ -1,25 +1,40 @@
 "use client";
+import { CldUploadWidget } from "next-cloudinary";
 
 import Image from "next/image";
 import UpdateButton from "@/components/rightMenu/UpdateButton";
 import { User } from "@prisma/client";
-import { useState } from "react";
+import { useActionState, useState } from "react";
+import { updateProfile } from "@/library/action";
+import { useRouter } from "next/navigation";
+
+
+
 
 const UpdateUser = ({ otherUser }: { otherUser: User }) => {
   const [open, setOpen] = useState(false);
+  const [cover,setCover] = useState<any>(false)
+  const router = useRouter();
 
+  const [state,formAction] = useActionState(updateProfile,{success:false,error:false})
+  
+  const handleClose = () =>{
+    setOpen(false);
+    state.success && router.refresh()
+  }
   return (
     <div className="">
       <span
       onClick={()=>setOpen(true)} 
       className="text-blue-500 text-xs cursor-pointer">Update</span>
       {open && (
-        <div className="absolute w-screen h-screen top-0 left-0 bg-black bg-opacity-65 flex items-center justify-center z-50 ">
+        <div className="w-screen h-screen top-0 left-0 fixed bg-black/65 flex items-center justify-center z-50 ">
+          
           <form
             action={(formData) =>
               formAction({ formData, cover: cover?.secure_url || "" })
             }
-            className="p-12 bg-white rounded-lg shadow-md flex flex-col gap-2 w-full md:w-1/2 xl:w-1/3 relative"
+            className="p-12 z-100 bg-white opacity-100 rounded-lg shadow-md flex flex-col gap-2 w-full md:w-1/2 xl:w-1/3 relative "
           >
             {/* TITLE */}
             <h1>Update Profile</h1>
@@ -158,10 +173,10 @@ const UpdateUser = ({ otherUser }: { otherUser: User }) => {
               X
             </div>
           </form>
-        </div>
+          </div>
       )}
     </div>
   );
-};
+  };
 
 export default UpdateUser;
