@@ -1,6 +1,7 @@
 import React from 'react'
 import { getCustomers } from '@/lib/queries/getCustomer'
 import { BackButton } from '@/components/BackButton'
+import CustomerForm from './CustomerForm'
 async function CustomerFormPage({searchParams,}:{
     searchParams:Promise<{[key:string]:string | undefined}>
 }) {
@@ -16,7 +17,7 @@ async function CustomerFormPage({searchParams,}:{
                     </>
                 )
             }
-                console.log(customer)
+                <CustomerForm/>
         }else{
 
         }
