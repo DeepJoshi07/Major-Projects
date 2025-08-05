@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import Title from "../components/Title";
 import CartTotal from "../components/CartTotal";
 import { assets } from "../assets/assets";
@@ -35,7 +35,31 @@ const PlaceOrder = () => {
     const value = e.target.value;
     setFormData((data) => ({ ...data, [name]: [value] }));
   };
-
+  const initPay = (order) =>{
+    const options = {
+      key:import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount:order.amount,
+      currency:order.currency,
+      name:'Order Payment',
+      description:'Order Payment',
+      order_id:order.id,
+      receipt:order.receipt,
+      handler: async(res)=>{
+        try {
+          const {data} = await axios.post(backendUrl + '/order/verify-razorpay',res,{headers:{token}})
+          if(data.success){
+            navigate('/orders');
+            setCartItems({})
+          }
+        } catch (error) {
+          console.log(error)
+          toast.error(error.message)
+        }
+      }
+    }
+    const rzp = new window.Razorpay(options)
+    rzp.open()
+  }
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -91,12 +115,16 @@ const PlaceOrder = () => {
           }
           break;
         }
-        case "rezorpay": {
-          const stripeResult = await axios.post(
+        case "razorpay": {
+          const razorpayResult = await axios.post(
             backendUrl + "/order/razorpay",
             orderData,
             { headers: { token } }
           );
+          
+          if(razorpayResult.data.success){
+            initPay(razorpayResult.data.order)
+          }
           
           break;
         }

@@ -43,12 +43,12 @@ const ShopContextProvider = (prop) => {
 
     if (token) {
       try {
-        const result = await axios.post(
+       await axios.post(
           backendUrl + "/cart/add",
           { itemId, size },
           { headers: { token } }
         );
-        console.log(result);
+        
       } catch (error) {
         toast.error(error.message);
       }
@@ -62,12 +62,12 @@ const ShopContextProvider = (prop) => {
 
     if (token) {
       try {
-        const result = await axios.post(
+        await axios.post(
           backendUrl + "/cart/update",
           { itemId, size, quantity },
           { headers: { token } }
         );
-        console.log(result);
+        
       } catch (error) {
         toast.error(error.message);
       }
