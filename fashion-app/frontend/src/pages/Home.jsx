@@ -4,9 +4,18 @@ import LatestCollection from '../components/LatestCollection'
 import BestSeller from '../components/BestSeller'
 import OurPolicy from '../components/OurPolicy'
 import NewsletterBox from '../components/NewsletterBox'
+import { useContext } from 'react'
+import { ShopContext } from '../context/ShopContext'
+import Login from './Login'
 
 const Home = () => {
-  return (
+  const {token} = useContext(ShopContext)
+  if(token == undefined || token == ''){
+    return <>
+    <Login/>
+    </>
+  }else{
+     return (
     <div>
       <Hero />
       <LatestCollection />
@@ -15,6 +24,8 @@ const Home = () => {
       <NewsletterBox />
     </div>
   )
+  }
+ 
 }
 
 export default Home
