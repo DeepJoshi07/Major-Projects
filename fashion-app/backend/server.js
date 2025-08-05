@@ -17,7 +17,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
     origin:[
-        "https://fashion-frontend-six.vercel.app/",
+        "https://fashion-frontend-six.vercel.app",
         "http://localhost:5174",
     ],
     credentials:true
