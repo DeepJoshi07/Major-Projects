@@ -3,7 +3,7 @@ import Posts from "@/components/feed/Post";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/library/client";
 
-const Feed = async ({ username }: { username: string }) => {
+const Feed = async ({ username }: { username?: string }) => {
   const { userId } = await auth();
   
   let posts;

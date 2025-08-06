@@ -7,7 +7,7 @@ import UserMediaCard from "./UserMediaCard";
 import { User } from "@prisma/client";
 
 
-const RightMenu = ({ otherUser }: { otherUser: User }) => {
+const RightMenu = ({ otherUser }: { otherUser?: User }) => {
   return (
     <div className="flex flex-col gap-6">
       {otherUser ? (

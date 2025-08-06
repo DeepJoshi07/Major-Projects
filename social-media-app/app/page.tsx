@@ -5,6 +5,7 @@ import RightMenu from "@/components/rightMenu/Right-menu";
 import Stories from "@/components/Stories";
 
 export default function Home() {
+  
   return (
     <div className="flex gap-6 pt-6">
       <div className="hidden xl:block w-[20%]">
