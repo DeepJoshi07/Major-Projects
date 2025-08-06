@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma generate":"npx prisma generate",
-    
+    "generate": "prisma generate",
+    "build": "npm run generate && next build",
+    "postinstall": "npm run generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.25.4",
