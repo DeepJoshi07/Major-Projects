@@ -1,5 +1,5 @@
 {
-  "homepage":"http://DeepJoshi07.github.io/Major-Projects/Portfolio",
+  "homepage": "https://DeepJoshi07.github.io/Major-projects/Portfolio/",
   "name": "portfolio_react",
   "private": true,
   "version": "0.0.0",
@@ -9,8 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@remixicon/react": "^4.2.0",
